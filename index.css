@@ -1,0 +1,106 @@
+html {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+	width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+button {
+	-webkit-appearance: none;
+	padding: 0;
+	border: none;
+	width: 60px;
+	height: 60px;
+	font-size: 30px;
+	text-align: center;
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #d4d4d4;
+	box-shadow: 0 1px 1px .5px #d4d4d4;
+	margin: 6px;
+}
+button:hover {
+	background-color: #82d99c;
+}
+
+#score {
+	width: 400px;
+	margin-left: 20px;
+	line-height: 10px;
+	font-size: 30px;
+	color: #d4d4d4;
+
+}
+.score-local-sum {
+	width: 200px;
+	float: left;
+}
+.score-total {
+	width: 200px;
+	float: right;
+}
+#overscore {
+	background-color: #fff;
+	color: #000;
+	width: 450px;
+	padding: 1px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 35px;
+	margin-top: 30px;
+}
+
+#overscore a, #overscore a:visited, #footer a, #footer a:visited {
+	color: #39bc60;
+	text-decoration: none;
+}
+
+#overscore a:hover, #footer a:hover {
+	border-bottom: 1px solid #39bc60;
+}
+
+#footer {
+	color: #000;
+	border-top: 2px solid #000;
+	font-weight: 300;
+	width: 533px;
+	margin-top: 30px;
+}
+@media only screen and (max-width: 480px) {  
+	html {
+		width: 300px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	button {
+		width: 35px;
+		height: 35px;
+		font-size: 20px;
+		margin: 2px;
+	}
+	#score {
+		width: 300px;
+		font-size: 20px;
+		color: #d4d4d4;
+
+	}
+	.score-local-sum {
+		width: 150px;
+		float: left;
+	}
+	.score-total {
+		width: 150px;
+		float: right;
+	}
+	#overscore {
+		width: 300px;
+		font-size: 20px;
+		margin-top: 5px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#footer {
+		width: 300px;
+	}
+}

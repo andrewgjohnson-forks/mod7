@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mod 7</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script>
+	function run() {
+		$('button').each(function() {
+			var rand = Math.ceil(Math.random()*8)+2;
+			$(this).html(rand.toString());
+		});
+		$('#overscore').css("display", "none");
+	}
+	
+	//init list of sums
+	var sumslist = new Array(1);
+	sumslist[0] = 7;
+
+	function change(tag) {
+		$('#'+tag).attr('disabled', 'disabled')
+		$('#'+tag).css({"backgroundColor": "#39bc60", "border": "none", "color": "#fff"});
+		var currentscore = $('.score-local-sum').find('p').text()
+		var preupdate = parseInt(currentscore.split(': ').pop());
+		var toadd = parseInt($('#'+tag).html())
+		$('.score-local-sum').find('p').text("Sum: "+(preupdate+toadd).toString());
+		var currentlocalscore = $('.score-local-sum').find('p').text()
+		var lspostupdate = parseInt(currentlocalscore.split(': ').pop());
+		var currenttotalscore = $('.score-total').find('p').text()
+		var tspreupdate = parseInt(currenttotalscore.split(': ').pop());
+
+		//check if sum can be added to score
+		if (lspostupdate % 7 == 0 && sumslist.indexOf(lspostupdate) ==-1) {
+			$('.score-local-sum').find('p').text("Sum: 0");
+			$('.score-total').find('p').text("Score: "+(tspreupdate+lspostupdate).toString());
+			
+			//add to sumslist
+			sumslist.push(lspostupdate);
+
+			//reset all the buttons
+			$('button').each(function() {
+				$(this).css({"backgroundColor": "#fff", "border": "1px solid #d4d4d4", "color": "#000"});
+				$(this).removeAttr('disabled');
+			});
+		}
+
+		//then check if sum is illegal
+		else if (lspostupdate % 3 == 0) {lost(tspreupdate);}
+
+	}
+
+	function lost(score) {
+		//deactivate buttons
+		$('button').each(function() {
+			$(this).attr('disabled','disabled')
+		});		
+		var playAgain = $("<a href='#' onclick='reset()'>Play again</a>")
+		$('#overscore').find('p').text("You scored "+(score).toString()+", not bad for a dog. ");
+		$('.pscore').append(playAgain);
+		$('#overscore').slideDown("Fast");
+	}
+
+	function reset() {
+		$('#overscore').slideUp("Fast");
+		//reactivate buttons
+		$('button').each(function() {
+			$(this).removeAttr('disabled');
+			var rand = Math.ceil(Math.random()*8)+2;
+			$(this).html(rand.toString());
+			$(this).css({"backgroundColor": "#fff", "border": "1px solid #d4d4d4", "color": "#000"});
+		});
+		$('.score-local-sum').find('p').text("Sum: 0");
+		$('.score-total').find('p').text("Score: 0");	
+		$('button').hover(
+			function() {
+				$(this).css("backgroundColor", "#82d99c");
+			},
+			function() {
+				$(this).css("backgroundColor", "#fff");
+			}
+		);
+	}
+	</script>
+</head>
+
+<body onload="run()">
+<div id="overscore">
+	<p class="pscore">The game is over thanks to you.</p>
+</div>	
+<div id="thegame">
+	<div id="score">
+		<div class="score-local-sum">
+			<p>Sum: 0</p>
+		</div>
+		<div class="score-total">
+			<p>Score: 0</p>
+		</div>
+	</div>
+	<table>
+	<tr>
+		<td><button type="button" id="oneone" onclick="change('oneone')"></td>
+		<td><button type="button" id="onetwo" onclick="change('onetwo')"></td>
+		<td><button type="button" id="onethree" onclick="change('onethree')"></td>
+		<td><button type="button" id="onefour" onclick="change('onefour')"></td>
+		<td><button type="button" id="onefive" onclick="change('onefive')"></td>
+		<td><button type="button" id="onesix" onclick="change('onesix')"></td>
+		<td><button type="button" id="oneseven" onclick="change('oneseven')"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="twoone" onclick="change('twoone')"></td>
+		<td><button type="button" id="twotwo" onclick="change('twotwo')"></td>
+		<td><button type="button" id="twothree" onclick="change('twothree')"></td>
+		<td><button type="button" id="twofour" onclick="change('twofour')"></td>
+		<td><button type="button" id="twofive" onclick="change('twofive')"></td>
+		<td><button type="button" id="twosix" onclick="change('twosix')"></td>
+		<td><button type="button" id="twoseven" onclick="change('twoseven')"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="threeone" onclick="change('threeone')"></td>
+		<td><button type="button" id="threetwo" onclick="change('threetwo')"></td>
+		<td><button type="button" id="threethree" onclick="change('threethree')"></td>
+		<td><button type="button" id="threefour" onclick="change('threefour')"></td>
+		<td><button type="button" id="threefive" onclick="change('threefive')"></td>
+		<td><button type="button" id="threesix" onclick="change('threesix')"></td>
+		<td><button type="button" id="threeseven" onclick="change('threeseven')"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="fourone" onclick="change('fourone')"></td>
+		<td><button type="button" id="fourtwo" onclick="change('fourtwo')"></td>
+		<td><button type="button" id="fourthree" onclick="change('fourthree')"></td>
+		<td><button type="button" id="fourfour" onclick="change('fourfour')"></td>
+		<td><button type="button" id="fourfive" onclick="change('fourfive')"></td>
+		<td><button type="button" id="foursix" onclick="change('foursix')"></td>
+		<td><button type="button" id="fourseven" onclick="change('fourseven')"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="fiveone" onclick="change('fiveone')"></td>
+		<td><button type="button" id="fivetwo" onclick="change('fivetwo')"></td>
+		<td><button type="button" id="fivethree" onclick="change('fivethree')"></td>
+		<td><button type="button" id="fivefour" onclick="change('fivefour')"></td>
+		<td><button type="button" id="fivefive" onclick="change('fivefive')"></td>
+		<td><button type="button" id="fivesix" onclick="change('fivesix')"></td>
+		<td><button type="button" id="fiveseven" onclick="change('fiveseven')"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="sixone" onclick="change('sixone')"></td>
+		<td><button type="button" id="sixtwo" onclick="change('sixtwo')"></td>
+		<td><button type="button" id="sixthree" onclick="change('sixthree')"></td>
+		<td><button type="button" id="sixfour" onclick="change('sixfour')"></td>
+		<td><button type="button" id="sixfive" onclick="change('sixfive')"></td>
+		<td><button type="button" id="sixsix" onclick="change('sixsix')"></td>
+		<td><button type="button" id="sixseven" onclick="change('sixseven')"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="sevenone" onclick="change('sevenone')"></td>
+		<td><button type="button" id="seventwo" onclick="change('seventwo')"></td>
+		<td><button type="button" id="seventhree" onclick="change('seventhree')"></td>
+		<td><button type="button" id="sevenfour" onclick="change('sevenfour')"></td>
+		<td><button type="button" id="sevenfive" onclick="change('sevenfive')"></td>
+		<td><button type="button" id="sevensix" onclick="change('sevensix')"></td>
+		<td><button type="button" id="sevenseven" onclick="change('sevenseven')"></td>
+	</tr>				
+	</table>
+</div>
+
+<div id="footer">
+	<div class="instructions">
+		<p>Click boxes to add their values to your "sum." If your sum is divisible by 7, then it is added to your score. If it is divisible by 3, then you lose. You can only get credit for each multiple of 7 once, the goal being to get as high of a score as possible.</p>
+	</div>
+	<div class="links">
+		<p>Made by <a href="http://twitter.com/zsch">Zach Schnell</a>. View the source on <a href="http://github.com/zchr">Github.</a></p>
+	</div>
+</div>
+
+</body>
+</html>
